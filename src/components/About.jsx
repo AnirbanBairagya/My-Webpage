@@ -10,7 +10,7 @@ export default function About() {
           <div className="about-text">
             <p>
               I'm a motivated Computer Science &amp; Engineering student with a
-              foundation in Python, Java, and Machine Learning.
+              foundation in Advance Python, Fundamental Java, Machine Learning and Deep Learning.
             </p>
             <p>
               I'm proficient in full-stack backend development using MySQL and
@@ -20,7 +20,7 @@ export default function About() {
               Engineer or Machine Learning role.
             </p>
             <p>
-              Outside of coursework, I stay sharp on LeetCode and GeeksforGeeks,
+              Outside of coursework, I stay sharp on small projects to solve real world problems,
               took part in the Smart India Hackathon, and enjoy travelling
               between builds.
             </p>
@@ -28,7 +28,7 @@ export default function About() {
           <div className="info-list">
             <div className="info-row">
               <span className="k">Location</span>
-              <span className="v">Katwa, West Bengal, IN</span>
+              <span className="v">Burdwan, West Bengal, IN</span>
             </div>
             <div className="info-row">
               <span className="k">Focus</span>
