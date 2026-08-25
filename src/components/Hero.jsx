@@ -39,7 +39,7 @@ export default function Hero() {
     <section id="top" className="hero">
       <div className="container">
         <div>
-          <p className="eyebrow">Portfolio / Katwa, West Bengal</p>
+          <p className="eyebrow">Portfolio / Burdwan, West Bengal</p>
           <h1 className="hero-name">
             Anirban <span>Bairagya</span>
           </h1>
@@ -58,15 +58,15 @@ export default function Hero() {
           </div>
           <div className="hero-stats">
             <div className="hero-stat">
-              <div className="num">84.7%</div>
+              <div className="num">First Class</div>
               <div className="label">Diploma, CST</div>
             </div>
             <div className="hero-stat">
-              <div className="num">24&ndash;28</div>
+              <div className="num">24&ndash;27</div>
               <div className="label">BTech CSE, in progress</div>
             </div>
             <div className="hero-stat">
-              <div className="num">SIH</div>
+              <div className="num">SIH 2025</div>
               <div className="label">Hackathon participant</div>
             </div>
           </div>
