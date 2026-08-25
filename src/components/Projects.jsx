@@ -15,8 +15,8 @@ export default function Projects() {
             <ScanVisual />
           </div>
           <div className="body">
-            <span className="status-pill">In progress &middot; Jan 2026&ndash;Present</span>
-            <h3>Brain MRI Image Segmentation</h3>
+            <span className="status-pill">In progress &middot; Dec 2025&ndash;Present</span>
+            <h3>Brain MRI Image Segmentation using Deep Learning</h3>
             <ul>
               <li>Built a machine learning model to segment and identify anomalies in brain MRI scans.</li>
               <li>Cleaned and pre-processed medical imaging datasets to optimize model performance.</li>
