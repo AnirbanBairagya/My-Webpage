@@ -13,7 +13,7 @@ export default function Interests() {
           </div>
           <div className="interest-card">
             <div className="k">Hackathons</div>
-            <div className="v">Smart India Hackathon (SIH) participant</div>
+            <div className="v">Smart India Hackathon (SIH 2025) participant</div>
           </div>
           <div className="interest-card">
             <div className="k">Off duty</div>
