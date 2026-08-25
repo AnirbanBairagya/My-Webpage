@@ -32,19 +32,19 @@ export function Education() {
         </div>
         <div className="timeline">
           <div className="timeline-item">
-            <div className="when">Oct 2024 &ndash; Present</div>
+            <div className="when">Present</div>
             <h3>BTech in Computer Science &amp; Engineering</h3>
             <div className="org">Dr. B. C. Roy Engineering College, Durgapur</div>
           </div>
           <div className="timeline-item">
-            <div className="when">Dec 2021 &ndash; Jul 2024</div>
+            <div className="when">Completed in 2024</div>
             <h3>Diploma in Computer Science &amp; Technology</h3>
-            <div className="org">Dr. B. C. Roy Polytechnic, Durgapur &middot; 84.7%</div>
+            <div className="org">Dr. B. C. Roy Polytechnic, Durgapur</div>
           </div>
           <div className="timeline-item">
-            <div className="when">Jan 2018 &ndash; Jun 2019</div>
+            <div className="when">Completed in 2019</div>
             <h3>Secondary Education</h3>
-            <div className="org">WBBSE &middot; 72.5%</div>
+            <div className="org">WBBSE</div>
           </div>
         </div>
       </div>
