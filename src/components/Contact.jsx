@@ -18,10 +18,10 @@ export default function Contact() {
             </a>
           </div>
           <div className="social-row">
-            <a href="#">GitHub</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">LeetCode</a>
-            <a href="#">GeeksforGeeks</a>
+            <a href="https://github.com/AnirbanBairagya" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/anirban-bairagya-9b90842ba/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://leetcode.com/u/Anirban139/" target="_blank" rel="noopener noreferrer">LeetCode</a>
+            <a href="https://www.geeksforgeeks.org/profile/anirbanbairagya" target="_blank" rel="noopener noreferrer">GeeksforGeeks</a>
           </div>
         </div>
       </div>
