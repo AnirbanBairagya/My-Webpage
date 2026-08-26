@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ScanVisual from './ScanVisual.jsx'
+import ArVisual from './ArVisual.jsx'
 import ProjectModal from './ProjectModal.jsx'
 
 const PROJECTS = [
@@ -39,6 +40,40 @@ const PROJECTS = [
       'TCGA-GBM — pre-operative, multi-modal glioblastoma MRI scans, a publicly available clinical dataset widely used in brain tumor segmentation research.',
     link: '', // add your GitHub repo URL here once you push the code
   },
+  {
+    id: 'pocket-heritage-ar',
+    status: 'Team Project · Smart India Hackathon (SIH) 2025 · Work in Progress',
+    title: 'Pocket Heritage — AR Cultural Heritage Platform',
+    tagline:
+      'An open-source AR app for visualizing high-fidelity 3D cultural heritage sites in the real world.',
+    problem:
+      'Most AR heritage-tourism prototypes are single-purpose, tightly-coupled apps that work fine for a demo but don\u2019t scale — adding a new monument or updating information usually means rebuilding and re-shipping the entire app.',
+    approach:
+      'Built with our team for Smart India Hackathon 2025, Pocket Heritage was engineered using enterprise-level full-stack principles rather than a typical Unity prototype. The goal was a highly scalable, data-driven application with a modular architecture — prioritizing clean code, decoupled systems, and optimized mobile storage.',
+    capabilities: [
+      'Hybrid on-demand asset pipeline: uses Unity Addressables to stream 3D models from a Netlify-hosted CDN instead of bundling them into the app, keeping install size small while scaling to unlimited heritage sites.',
+      'Cloud-driven metadata via Firebase Firestore: site titles, historical descriptions, and AR label coordinates are stored separately from 3D assets, so admins can update information or add new monuments in real time without a new app release.',
+      'Centralized state management: a singleton ActiveSiteContext (inspired by React\u2019s Context API) acts as the single source of truth for the active session, with a single cleanup command that releases heavy 3D assets from memory to prevent leaks.',
+      'Event-driven architecture: a centralized event bus decouples the UI, data layer, and AR engine, so any part of the system can be modified or replaced without breaking the rest of the app.',
+      'Stack-based UI navigation: a LIFO state machine manages transitions between the dashboard, AR view, and info panels, with native support for the mobile back button and non-blocking async loading.',
+    ],
+    impact: [
+      'Keeps the app lightweight while supporting unlimited heritage sites, since 3D content streams on demand instead of being baked into the install.',
+      'Lets non-technical teammates update site information and AR content in real time, without waiting on a new app store release.',
+      'Built for maintainability as a team codebase, not just a solo demo — clean separation of concerns was a deliberate design goal for the hackathon submission.',
+    ],
+    stack: [
+      'C#',
+      'Unity',
+      'AR Foundation (ARCore / ARKit)',
+      'Firebase Firestore',
+      'Unity Addressables',
+      'Netlify (CDN)',
+      'Git & Git LFS',
+    ],
+    link: '', // add your GitHub repo URL here
+    visual: 'ar',
+  },
 ]
 
 export default function Projects() {
@@ -60,7 +95,7 @@ export default function Projects() {
             onClick={() => setActive(project)}
           >
             <div className="visual">
-              <ScanVisual />
+              {project.visual === 'ar' ? <ArVisual /> : <ScanVisual />}
             </div>
             <div className="body">
               <span className="status-pill">{project.status}</span>
@@ -77,7 +112,7 @@ export default function Projects() {
 
         <div className="projects-more">
           <div className="project-placeholder">
-            <span>+ upcomming projects</span>
+            <span>+ Upcomming projects</span>
             <span style={{ color: 'var(--text-dim)', fontSize: '0.78rem' }}>
               Comming soon.
             </span>
