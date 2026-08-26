@@ -5,11 +5,11 @@ const GROUPS = [
   },
   {
     title: 'Databases',
-    items: ['MySQL'],
+    items: ['MySQL', 'MongoDB'],
   },
   {
     title: 'Machine Learning',
-    items: ['Machine Learning', 'Data Preprocessing'],
+    items: ['Machine Learning', 'Data Preprocessing', 'Deep Learning', 'PyTorch', 'CNN'],
   },
   {
     title: 'Tools & Practices',
