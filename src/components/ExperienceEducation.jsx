@@ -17,6 +17,17 @@ export function Experience() {
             </ul>
           </div>
         </div>
+        <div className="timeline">
+          <div className="timeline-item">
+            <div className="when">Sep 2023 &ndash; Oct 2023</div>
+            <h3>Web Development Using PHP and MYSQL</h3>
+            <div className="org">Ardent Computech Pvt. Ltd.</div>
+            <ul>
+              <li>Gained hands-on experience in developing dynamic web applications using PHP and MySQL.</li>
+              <li>Developed and implemented a functional Online Bus Ticket Booking System with a user-friendly interface.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   )
