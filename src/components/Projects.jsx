@@ -6,7 +6,7 @@ import ProjectModal from './ProjectModal.jsx'
 const PROJECTS = [
   {
     id: 'brain-tumor-segmentation',
-    status: 'Major Project · B.Tech CSE, MAKAUT',
+    status: 'Major Project · B.Tech CSE',
     title: 'Reliable AI-Assisted Brain Tumor Segmentation',
     tagline:
       'Deep learning for medical imaging — a segmentation system that knows when to ask for help.',
