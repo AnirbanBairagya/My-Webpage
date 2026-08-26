@@ -1,7 +1,7 @@
 const GROUPS = [
   {
     title: 'Languages',
-    items: ['Python', 'Java'],
+    items: ['Python', 'Java', 'C'],
   },
   {
     title: 'Databases',
