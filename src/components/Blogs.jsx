@@ -37,9 +37,9 @@ export default function Blogs() {
           </>
         ) : (
           <div className="blog-placeholder">
-            <span>+ Your first post goes here</span>
+            <span>+ Comming soon</span>
             <span style={{ color: 'var(--text-dim)', fontSize: '0.78rem' }}>
-              Add entries to the BLOGS list in Blogs.jsx — cards and the ALL_BLOGS link appear automatically.
+              Blogs will be update soon. Hurry up!
             </span>
           </div>
         )}
