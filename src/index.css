@@ -533,6 +533,29 @@ button:focus-visible {
   overflow: hidden;
 }
 
+.project-flagship-clickable {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.project-flagship-clickable:hover {
+  border-color: var(--cyan);
+  transform: translateY(-3px);
+}
+
+.view-more {
+  margin-top: 20px;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--cyan);
+}
+
 @media (max-width: 860px) {
   .project-flagship {
     grid-template-columns: 1fr;
