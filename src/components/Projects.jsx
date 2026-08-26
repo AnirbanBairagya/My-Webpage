@@ -4,17 +4,39 @@ import ProjectModal from './ProjectModal.jsx'
 
 const PROJECTS = [
   {
-    id: 'mri-segmentation',
-    status: 'In progress · Jan 2026–Present',
-    title: 'Brain MRI 3D Image Segmentation using Deep Learning',
-    summary:
-      'A machine learning project focused on segmenting brain MRI scans and flagging anomalies for review.',
-    details: [
-      'Building an ML model that segments brain MRI scans and flags anomalies.',
-      'Cleaning and pre-processing medical imaging datasets to get the model performing reliably.',
-      'Currently tuning preprocessing steps to improve segmentation accuracy on noisy scans.',
+    id: 'brain-tumor-segmentation',
+    status: 'Major Project · B.Tech CSE, MAKAUT',
+    title: 'Reliable AI-Assisted Brain Tumor Segmentation',
+    tagline:
+      'Deep learning for medical imaging — a segmentation system that knows when to ask for help.',
+    problem:
+      'Glioblastoma treatment planning depends on precisely outlining the tumor on MRI scans. Doing this by hand is slow and varies from one radiologist to another, while AI segmentation models — even accurate ones — occasionally fail on individual scans without warning. In a clinical setting, a confident-looking but wrong segmentation is more dangerous than a slow one, so accuracy alone isn\u2019t enough — the system also needs to know when to be trusted.',
+    approach:
+      'An end-to-end deep learning system that segments brain tumors from multi-modal MRI scans (T1, T1CE, T2, FLAIR) and, going beyond a standard segmentation model, assesses the reliability of its own output on every new scan. Instead of treating every prediction as equally trustworthy, it distinguishes cases it\u2019s confident about from ones that genuinely need a radiologist\u2019s attention.',
+    capabilities: [
+      'Multi-modal 3D tumor segmentation trained and cross-validated on a public clinical MRI dataset (TCGA-GBM), covering the whole tumor, tumor core, and enhancing tumor sub-regions.',
+      'Automatic, label-free reliability check on every prediction — estimates how trustworthy each segmentation is without needing ground-truth to compare against.',
+      'Smart prioritization of a limited human-review budget, so the cases most worth a radiologist\u2019s time get flagged first.',
+      'A self-refinement step that improves the segmentation in its own weak spots, without requiring additional manual annotation.',
+      'Publication-grade evaluation: a locked test set opened only once, paired statistical significance testing, and comparison against an established baseline (nnU-Net).',
     ],
-    stack: ['Python', 'Machine Learning', 'Image Segmentation'],
+    impact: [
+      'Cuts radiologist workload by automatically clearing scans the model is genuinely confident about.',
+      'Improves patient safety by catching likely-incorrect segmentations before they reach a treatment decision.',
+      'Makes AI segmentation more deployable in real clinical workflows by replacing a black-box prediction with a system that reports its own confidence.',
+    ],
+    stack: [
+      'Python',
+      'PyTorch',
+      '3D CNN (SegResNet)',
+      'NiBabel',
+      'NumPy / SciPy',
+      'scikit-learn',
+      'Statistical Testing',
+      'Matplotlib',
+    ],
+    dataset:
+      'TCGA-GBM — pre-operative, multi-modal glioblastoma MRI scans, a publicly available clinical dataset widely used in brain tumor segmentation research.',
     link: '', // add your GitHub repo URL here once you push the code
   },
 ]
@@ -44,11 +66,10 @@ export default function Projects() {
               <span className="status-pill">{project.status}</span>
               <h3>{project.title}</h3>
               <ul>
-                {project.details.slice(0, 2).map((line, i) => (
-                  <li key={i}>{line}</li>
-                ))}
+                <li>{project.tagline}</li>
+                {project.capabilities?.[0] && <li>{project.capabilities[0]}</li>}
               </ul>
-              <div className="meta">stack: {project.stack.join(' · ').toLowerCase()}</div>
+              <div className="meta">stack: {project.stack.slice(0, 4).join(' · ').toLowerCase()}</div>
               <span className="view-more">View details &rarr;</span>
             </div>
           </button>
