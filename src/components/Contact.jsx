@@ -13,9 +13,6 @@ export default function Contact() {
             <a href="mailto:sonalibairagya139@gmail.com" className="btn btn-primary">
               Email me
             </a>
-            <a href="tel:+918158872912" className="btn btn-ghost">
-              +91 81588 72912
-            </a>
           </div>
           <div className="social-row">
             <a href="https://github.com/AnirbanBairagya" target="_blank" rel="noopener noreferrer">GitHub</a>
