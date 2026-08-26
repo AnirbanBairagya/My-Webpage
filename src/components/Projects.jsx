@@ -42,7 +42,7 @@ const PROJECTS = [
   },
   {
     id: 'pocket-heritage-ar',
-    status: 'Team Project · Smart India Hackathon (SIH) 2025',
+    status: 'Smart India Hackathon (SIH) 2025',
     title: 'Pocket Heritage — AR Cultural Heritage Platform',
     tagline:
       'An open-source AR app for visualizing high-fidelity 3D cultural heritage sites in the real world.',
