@@ -77,9 +77,9 @@ export default function Projects() {
 
         <div className="projects-more">
           <div className="project-placeholder">
-            <span>+ Add your next project</span>
+            <span>+ upcomming projects</span>
             <span style={{ color: 'var(--text-dim)', fontSize: '0.78rem' }}>
-              Add a new entry to the PROJECTS list in Projects.jsx — it becomes clickable automatically.
+              Comming soon.
             </span>
           </div>
         </div>
