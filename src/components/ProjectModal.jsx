@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 export default function ProjectModal({ project, onClose }) {
   useEffect(() => {
+    if (!project) return
     const onKey = (e) => {
       if (e.key === 'Escape') onClose()
     }
