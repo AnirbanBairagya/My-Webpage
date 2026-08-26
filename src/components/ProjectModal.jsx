@@ -12,7 +12,7 @@ export default function ProjectModal({ project, onClose }) {
       window.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
     }
-  }, [onClose])
+  }, [project, onClose])
 
   if (!project) return null
 
@@ -32,23 +32,59 @@ export default function ProjectModal({ project, onClose }) {
         <span className="status-pill">{project.status}</span>
         <h3 id="modal-title">{project.title}</h3>
 
-        <p className="modal-summary">{project.summary}</p>
+        {project.tagline && <p className="modal-summary">{project.tagline}</p>}
 
-        <h4 className="modal-subhead">What it does</h4>
-        <ul>
-          {project.details.map((line, i) => (
-            <li key={i}>{line}</li>
-          ))}
-        </ul>
+        {project.problem && (
+          <>
+            <h4 className="modal-subhead">The Problem</h4>
+            <p className="modal-body-text">{project.problem}</p>
+          </>
+        )}
+
+        {project.approach && (
+          <>
+            <h4 className="modal-subhead">What I Built</h4>
+            <p className="modal-body-text">{project.approach}</p>
+          </>
+        )}
+
+        {project.capabilities?.length > 0 && (
+          <>
+            <h4 className="modal-subhead">Key Capabilities</h4>
+            <ul>
+              {project.capabilities.map((line, i) => (
+                <li key={i}>{line}</li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {project.impact?.length > 0 && (
+          <>
+            <h4 className="modal-subhead">Why It Matters</h4>
+            <ul>
+              {project.impact.map((line, i) => (
+                <li key={i}>{line}</li>
+              ))}
+            </ul>
+          </>
+        )}
 
         {project.stack?.length > 0 && (
           <>
-            <h4 className="modal-subhead">Tech stack</h4>
+            <h4 className="modal-subhead">Tech Stack</h4>
             <div className="tag-row">
               {project.stack.map((t) => (
                 <span className="tag" key={t}>{t}</span>
               ))}
             </div>
+          </>
+        )}
+
+        {project.dataset && (
+          <>
+            <h4 className="modal-subhead">Dataset</h4>
+            <p className="modal-body-text">{project.dataset}</p>
           </>
         )}
 
