@@ -48,9 +48,9 @@ export default function Hero() {
             <span className="caret" />
           </div>
           <p className="hero-pitch">
-            Computer Science &amp; Engineering student building at the intersection of
-            machine learning and backend systems &mdash; from segmenting anomalies in
-            brain MRI scans to shipping full-stack applications with MySQL.
+            CSE student who likes working where machine learning meets backend
+            engineering &mdash; currently segmenting anomalies in brain MRI scans,
+            and building full-stack apps with Python, Java, and MySQL.
           </p>
           <div className="hero-actions">
             <a href="#projects" className="btn btn-primary">View projects</a>
