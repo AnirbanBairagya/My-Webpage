@@ -112,9 +112,9 @@ export default function Projects() {
 
         <div className="projects-more">
           <div className="project-placeholder">
-            <span>+ Upcomming projects</span>
+            <span>+ More projects in progress</span>
             <span style={{ color: 'var(--text-dim)', fontSize: '0.78rem' }}>
-              Comming soon.
+              The next build is already underway — check back soon.
             </span>
           </div>
         </div>
