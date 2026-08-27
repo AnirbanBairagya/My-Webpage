@@ -19,6 +19,7 @@ const BLOGS = [
     audience:
       'AI/ML researchers, computer vision engineers, and healthcare technology enthusiasts looking for technical depth in medical imaging.',
     tags: ['Deep Learning', 'Computer Vision', 'Python', 'Healthcare AI'],
+    image: '/medical-segmentation.png',
     link: '',
   },
   {
@@ -38,6 +39,7 @@ const BLOGS = [
     audience:
       'Frontend web developers, full-stack engineers, and open-source contributors looking to update their skill set.',
     tags: ['Frontend', 'ReactJS', 'Web Development', 'Performance'],
+    image: '/react-19.png',
     link: '',
   },
   {
@@ -57,6 +59,7 @@ const BLOGS = [
     audience:
       'Product managers, tech consultants, AI strategists, and participants in innovation hackathons or pitch competitions.',
     tags: ['Generative AI', 'Product Strategy', 'Business Tech', 'Innovation'],
+    image: '/genai-cx.png',
     link: '',
   },
   {
@@ -76,6 +79,7 @@ const BLOGS = [
     audience:
       'Computer science engineering students, fresh graduates, and junior developers navigating the campus placement process.',
     tags: ['Career Advice', 'DSA', 'Placements', 'Engineering'],
+    image: '/final-year-grind.png',
     link: '',
   },
 ]
