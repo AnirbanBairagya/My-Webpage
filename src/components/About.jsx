@@ -29,7 +29,7 @@ export default function About() {
           <div className="info-list">
             <div className="info-row">
               <span className="k">Location</span>
-              <span className="v">Burdeam, West Bengal, IN</span>
+              <span className="v">Burdwan, West Bengal, IN</span>
             </div>
             <div className="info-row">
               <span className="k">Focus</span>
