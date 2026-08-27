@@ -9,26 +9,27 @@ export default function About() {
         <div className="about-grid">
           <div className="about-text">
             <p>
-              I'm a motivated Computer Science &amp; Engineering student with a
-              foundation in Advance Python, Fundamental Java, Machine Learning and Deep Learning.
+              I'm a Computer Science &amp; Engineering student with a solid
+              foundation in Python, Java, and Machine Learning &mdash; and a habit
+              of actually finishing what I start.
             </p>
             <p>
-              I'm proficient in full-stack backend development using MySQL and
-              comfortable working within agile software development lifecycles
-              (SDLC). Right now I'm looking to bring that combination of
-              problem-solving and technical grounding to an Associate Software
-              Engineer or Machine Learning role.
+              On the backend side, I work with MySQL and follow agile SDLC
+              practices from planning through to shipping. I'm currently
+              looking for an Associate Software Engineer or Machine Learning
+              role where I can put both sides of that &mdash; ML and backend
+              &mdash; to work.
             </p>
             <p>
-              Outside of coursework, I stay sharp on small projects to solve real world problems,
-              took part in the Smart India Hackathon, and enjoy travelling
-              between builds.
+              When I'm not building, I'm solving problems on LeetCode and
+              GeeksforGeeks, competed in the Smart India Hackathon, and try to
+              travel whenever there's a gap between projects.
             </p>
           </div>
           <div className="info-list">
             <div className="info-row">
               <span className="k">Location</span>
-              <span className="v">Burdwan, West Bengal, IN</span>
+              <span className="v">Burdeam, West Bengal, IN</span>
             </div>
             <div className="info-row">
               <span className="k">Focus</span>
