@@ -35,6 +35,10 @@ export default function BlogModal({ post, onClose }) {
         <span className="status-pill">{post.status}</span>
         <h3 id="blog-modal-title">{post.title}</h3>
 
+        {post.image && (
+          <img src={post.image} alt={post.title} className="modal-image" />
+        )}
+
         <p className="modal-summary">{post.summary}</p>
 
         {post.outline?.length > 0 && (
