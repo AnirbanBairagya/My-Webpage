@@ -54,6 +54,7 @@ export default function Hero() {
           </p>
           <div className="hero-actions">
             <a href="#projects" className="btn btn-primary">View projects</a>
+            <a href="/resume.pdf" download className="btn btn-ghost">Resume / CV</a>
             <a href="#contact" className="btn btn-ghost">Contact me</a>
           </div>
           <div className="hero-stats">
