@@ -7,6 +7,7 @@ import Blogs from './components/Blogs.jsx'
 import { Experience, Education } from './components/ExperienceEducation.jsx'
 import Interests from './components/Interests.jsx'
 import Contact, { Footer } from './components/Contact.jsx'
+import ChatWidget from './components/ChatWidget.jsx'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
       <Interests />
       <Contact />
       <Footer />
+      <ChatWidget />
     </>
   )
 }
