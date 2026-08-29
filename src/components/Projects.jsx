@@ -1,7 +1,17 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import ScanVisual from './ScanVisual.jsx'
 import ArVisual from './ArVisual.jsx'
 import ProjectModal from './ProjectModal.jsx'
+
+// Recruiter-mode personalization: pure client-side keyword/tag logic,
+// no API calls. Each project carries a `relevance` score (0-3) per role;
+// picking a role re-sorts the list, highest relevance first, using a
+// stable sort so equally-relevant projects keep their original order.
+const ROLE_OPTIONS = [
+  { id: 'all', label: 'All roles' },
+  { id: 'ml-engineer', label: 'ML / AI Engineer' },
+  { id: 'backend', label: 'Backend / Software Engineer' },
+]
 
 const PROJECTS = [
   {
@@ -47,6 +57,7 @@ const PROJECTS = [
     dataset:
       'TCGA-GBM — pre-operative, multi-modal glioblastoma MRI scans, a publicly available clinical dataset widely used in brain tumor segmentation research.',
     link: '', // add your GitHub repo URL here once you push the code
+    relevance: { 'ml-engineer': 3, backend: 1 },
   },
   {
     id: 'pocket-heritage-ar',
@@ -89,11 +100,22 @@ const PROJECTS = [
     ],
     link: '', // add your GitHub repo URL here
     visual: 'ar',
+    relevance: { 'ml-engineer': 1, backend: 3 },
   },
 ]
 
 export default function Projects() {
   const [active, setActive] = useState(null)
+  const [role, setRole] = useState('all')
+
+  const visibleProjects = useMemo(() => {
+    if (role === 'all') return PROJECTS
+    // Array.prototype.sort is stable, so projects tied on relevance
+    // keep their original relative order instead of jumping around.
+    return [...PROJECTS].sort(
+      (a, b) => (b.relevance?.[role] || 0) - (a.relevance?.[role] || 0)
+    )
+  }, [role])
 
   return (
     <section id="projects">
@@ -104,7 +126,22 @@ export default function Projects() {
           <p>Everything I build ends up here — click a project for the full story.</p>
         </div>
 
-        {PROJECTS.map((project) => (
+        <div className="view-toggle" role="tablist" aria-label="Show projects relevant to">
+          {ROLE_OPTIONS.map((opt) => (
+            <button
+              key={opt.id}
+              type="button"
+              role="tab"
+              aria-selected={role === opt.id}
+              className={role === opt.id ? 'active' : ''}
+              onClick={() => setRole(opt.id)}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+
+        {visibleProjects.map((project) => (
           <button
             key={project.id}
             className="project-flagship project-flagship-clickable"
