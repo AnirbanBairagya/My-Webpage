@@ -162,7 +162,10 @@ export default async function handler(req, res) {
           contents,
           generationConfig: {
             maxOutputTokens: 350,
-            temperature: 0.4,
+            // Gemini 3.x: temperature/top_p/top_k are no longer recommended
+            // (silently ignored on Flash-Lite). thinking_level "minimal"
+            // keeps this fast and cheap for simple knowledge-base lookup.
+            thinking_level: 'minimal',
           },
         }),
       }
@@ -175,7 +178,12 @@ export default async function handler(req, res) {
     }
 
     const data = await upstream.json()
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()
+    const parts = data?.candidates?.[0]?.content?.parts || []
+    const reply = parts
+      .filter((p) => p.text && !p.thought)
+      .map((p) => p.text)
+      .join('')
+      .trim()
 
     if (!reply) {
       return res.status(502).json({ error: "Didn't get a response back — please try again." })
