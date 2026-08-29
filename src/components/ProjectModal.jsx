@@ -1,7 +1,24 @@
 import { useEffect, useState } from 'react'
 
+// Voice narration: browser-native Web Speech API (SpeechSynthesis).
+// No API key, no network call, nothing to break server-side — just
+// reads the currently-visible text aloud. Text is rebuilt from
+// whichever view (recruiter/engineer) is active, so narration always
+// matches what's on screen.
+function buildNarrationText(project, problemText, approachText) {
+  const parts = [project.title]
+  if (project.tagline) parts.push(project.tagline)
+  if (problemText) parts.push(problemText)
+  if (approachText) parts.push(approachText)
+  if (project.reasoning) parts.push(`Why this approach: ${project.reasoning}`)
+  return parts.join('. ')
+}
+
+const SPEECH_SUPPORTED = typeof window !== 'undefined' && 'speechSynthesis' in window
+
 export default function ProjectModal({ project, onClose }) {
   const [view, setView] = useState('recruiter')
+  const [speaking, setSpeaking] = useState(false)
 
   useEffect(() => {
     if (!project) return
@@ -17,6 +34,20 @@ export default function ProjectModal({ project, onClose }) {
     }
   }, [project, onClose])
 
+  // Stop any narration in progress whenever the visible project or
+  // view changes, or the modal unmounts — never let it read stale
+  // text over a project you've already navigated away from.
+  useEffect(() => {
+    if (SPEECH_SUPPORTED) window.speechSynthesis.cancel()
+    setSpeaking(false)
+  }, [project, view])
+
+  useEffect(() => {
+    return () => {
+      if (SPEECH_SUPPORTED) window.speechSynthesis.cancel()
+    }
+  }, [])
+
   if (!project) return null
 
   const hasToggle = Boolean(project.recruiterPitch)
@@ -24,6 +55,25 @@ export default function ProjectModal({ project, onClose }) {
     hasToggle && view === 'recruiter' ? project.recruiterPitch.problem : project.problem
   const approachText =
     hasToggle && view === 'recruiter' ? project.recruiterPitch.approach : project.approach
+
+  function toggleNarration() {
+    if (!SPEECH_SUPPORTED) return
+
+    if (speaking) {
+      window.speechSynthesis.cancel()
+      setSpeaking(false)
+      return
+    }
+
+    const text = buildNarrationText(project, problemText, approachText)
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.onend = () => setSpeaking(false)
+    utterance.onerror = () => setSpeaking(false)
+
+    window.speechSynthesis.cancel() // clear anything queued before speaking
+    window.speechSynthesis.speak(utterance)
+    setSpeaking(true)
+  }
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -42,6 +92,17 @@ export default function ProjectModal({ project, onClose }) {
         <h3 id="modal-title">{project.title}</h3>
 
         {project.tagline && <p className="modal-summary">{project.tagline}</p>}
+
+        {SPEECH_SUPPORTED && (
+          <button
+            type="button"
+            className="btn btn-ghost"
+            onClick={toggleNarration}
+            aria-pressed={speaking}
+          >
+            {speaking ? '⏹ Stop narration' : '🔊 Listen to this project'}
+          </button>
+        )}
 
         {project.reasoning && (
           <div className="reasoning-box">
@@ -128,7 +189,7 @@ export default function ProjectModal({ project, onClose }) {
         )}
 
         {project.link && (
-          <a
+          
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
