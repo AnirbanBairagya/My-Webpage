@@ -162,10 +162,11 @@ export default async function handler(req, res) {
           contents,
           generationConfig: {
             maxOutputTokens: 350,
+            thinkingConfig: {
             // Gemini 3.x: temperature/top_p/top_k are no longer recommended
             // (silently ignored on Flash-Lite). thinking_level "minimal"
             // keeps this fast and cheap for simple knowledge-base lookup.
-            thinking_level: 'minimal',
+              thinkingLevel: 'low',
           },
         }),
       }
