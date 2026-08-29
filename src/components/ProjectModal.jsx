@@ -1,8 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function ProjectModal({ project, onClose }) {
+  const [view, setView] = useState('recruiter')
+
   useEffect(() => {
     if (!project) return
+    setView('recruiter')
     const onKey = (e) => {
       if (e.key === 'Escape') onClose()
     }
@@ -15,6 +18,12 @@ export default function ProjectModal({ project, onClose }) {
   }, [project, onClose])
 
   if (!project) return null
+
+  const hasToggle = Boolean(project.recruiterPitch)
+  const problemText =
+    hasToggle && view === 'recruiter' ? project.recruiterPitch.problem : project.problem
+  const approachText =
+    hasToggle && view === 'recruiter' ? project.recruiterPitch.approach : project.approach
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -34,17 +43,47 @@ export default function ProjectModal({ project, onClose }) {
 
         {project.tagline && <p className="modal-summary">{project.tagline}</p>}
 
-        {project.problem && (
+        {project.reasoning && (
+          <div className="reasoning-box">
+            <span className="reasoning-label">&gt; why this approach</span>
+            <p>{project.reasoning}</p>
+          </div>
+        )}
+
+        {hasToggle && (
+          <div className="view-toggle" role="tablist" aria-label="Explanation level">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={view === 'recruiter'}
+              className={view === 'recruiter' ? 'active' : ''}
+              onClick={() => setView('recruiter')}
+            >
+              For Recruiters
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={view === 'engineer'}
+              className={view === 'engineer' ? 'active' : ''}
+              onClick={() => setView('engineer')}
+            >
+              For Engineers
+            </button>
+          </div>
+        )}
+
+        {problemText && (
           <>
             <h4 className="modal-subhead">The Problem</h4>
-            <p className="modal-body-text">{project.problem}</p>
+            <p className="modal-body-text">{problemText}</p>
           </>
         )}
 
-        {project.approach && (
+        {approachText && (
           <>
             <h4 className="modal-subhead">What I Built</h4>
-            <p className="modal-body-text">{project.approach}</p>
+            <p className="modal-body-text">{approachText}</p>
           </>
         )}
 
