@@ -14,6 +14,14 @@ const PROJECTS = [
       'Glioblastoma treatment planning depends on precisely outlining the tumor on MRI scans. Doing this by hand is slow and varies from one radiologist to another, while AI segmentation models — even accurate ones — occasionally fail on individual scans without warning. In a clinical setting, a confident-looking but wrong segmentation is more dangerous than a slow one, so accuracy alone isn\u2019t enough — the system also needs to know when to be trusted.',
     approach:
       'An end-to-end deep learning system that segments brain tumors from multi-modal MRI scans (T1, T1CE, T2, FLAIR) and, going beyond a standard segmentation model, assesses the reliability of its own output on every new scan. Instead of treating every prediction as equally trustworthy, it distinguishes cases it\u2019s confident about from ones that genuinely need a radiologist\u2019s attention.',
+    recruiterPitch: {
+      problem:
+        'Reading brain scans by hand is slow, and even good AI models can quietly get it wrong sometimes — risky in healthcare. This project builds an AI that doesn\u2019t just read the scan, it also flags when it\u2019s unsure, so doctors know exactly where to spend their limited time.',
+      approach:
+        'I built a deep learning system that finds and outlines brain tumors in MRI scans, and — the key part — rates how confident it is in each result. Easy cases get handled automatically; uncertain ones get flagged for a radiologist, instead of trusting every AI output equally.',
+    },
+    reasoning:
+      'I chose to build a confidence layer instead of only chasing raw accuracy, because in a hospital setting a wrong-but-confident prediction is more dangerous than a slow one — trust matters as much as performance.',
     capabilities: [
       'Multi-modal 3D tumor segmentation trained and cross-validated on a public clinical MRI dataset (TCGA-GBM), covering the whole tumor, tumor core, and enhancing tumor sub-regions.',
       'Automatic, label-free reliability check on every prediction — estimates how trustworthy each segmentation is without needing ground-truth to compare against.',
@@ -50,6 +58,14 @@ const PROJECTS = [
       'Most AR heritage-tourism prototypes are single-purpose, tightly-coupled apps that work fine for a demo but don\u2019t scale — adding a new monument or updating information usually means rebuilding and re-shipping the entire app.',
     approach:
       'Built with our team for Smart India Hackathon 2025, Pocket Heritage was engineered using enterprise-level full-stack principles rather than a typical Unity prototype. The goal was a highly scalable, data-driven application with a modular architecture — prioritizing clean code, decoupled systems, and optimized mobile storage.',
+    recruiterPitch: {
+      problem:
+        'Most AR history apps are built as one-off demos that are hard to update or expand afterward. We wanted something a real team could maintain and grow over time — add a new monument without shipping a whole new app.',
+      approach:
+        'Built for Smart India Hackathon 2025 with a small team, Pocket Heritage lets you point your phone at a heritage site and see it reconstructed in AR with historical context layered on top. Behind the scenes it\u2019s built like a real product: content updates instantly from the cloud, and new sites can be added without an app store release.',
+    },
+    reasoning:
+      'We deliberately over-engineered the "boring" parts — asset delivery and state management — because hackathon demos are judged in one weekend, but a heritage app that can\u2019t be updated afterward isn\u2019t actually useful to anyone.',
     capabilities: [
       'Hybrid on-demand asset pipeline: uses Unity Addressables to stream 3D models from a Netlify-hosted CDN instead of bundling them into the app, keeping install size small while scaling to unlimited heritage sites.',
       'Cloud-driven metadata via Firebase Firestore: site titles, historical descriptions, and AR label coordinates are stored separately from 3D assets, so admins can update information or add new monuments in real time without a new app release.',
