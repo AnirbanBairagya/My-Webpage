@@ -189,7 +189,7 @@ export default function ProjectModal({ project, onClose }) {
         )}
 
         {project.link && (
-          
+          <a
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
