@@ -161,7 +161,7 @@ export default async function handler(req, res) {
           system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
           contents,
           generationConfig: {
-            maxOutputTokens: 350,
+            maxOutputTokens: 800,
             // Gemini 3.x: temperature/top_p/top_k are no longer recommended
             // (silently ignored on Flash-Lite). thinkingLevel "low" keeps
             // this fast and cheap for simple knowledge-base lookups.
