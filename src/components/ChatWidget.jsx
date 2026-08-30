@@ -101,7 +101,7 @@ export default function ChatWidget() {
           <div className="chat-panel-header">
             <div>
               <div className="chat-panel-title">Ask about Anirban</div>
-              <div className="chat-panel-subtitle">AI-powered · answers from his real resume</div>
+              <div className="chat-panel-subtitle">Anirban is here to answer</div>
             </div>
             <button className="chat-panel-close" onClick={() => setOpen(false)} aria-label="Close chat">
               &times;
@@ -116,9 +116,7 @@ export default function ChatWidget() {
             ))}
             {loading && (
               <div className="chat-bubble chat-bubble-assistant chat-typing">
-                <span></span>
-                <span></span>
-                <span></span>
+                Anirban is answering…
               </div>
             )}
             {error && <div className="chat-error">{error}</div>}
