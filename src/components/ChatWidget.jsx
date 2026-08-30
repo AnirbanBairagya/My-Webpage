@@ -116,7 +116,9 @@ export default function ChatWidget() {
             ))}
             {loading && (
               <div className="chat-bubble chat-bubble-assistant chat-typing">
-                Anirban is answering…
+                <span></span>
+                <span></span>
+                <span></span>
               </div>
             )}
             {error && <div className="chat-error">{error}</div>}
