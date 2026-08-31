@@ -26,11 +26,24 @@ const CLASS_COLORS = [
 
 const MAX_DIMENSION = 1280 // downscale large phone photos before processing
 
+// Confidence heatmap: red (uncertain) through yellow to green (confident).
+function confidenceColor(conf) {
+  const c = Math.max(0, Math.min(1, conf))
+  if (c < 0.5) {
+    const t = c / 0.5
+    return [230, Math.round(60 + t * (215 - 60)), 50]
+  }
+  const t = (c - 0.5) / 0.5
+  return [Math.round(230 - t * (230 - 40)), 215, Math.round(50 + t * (100 - 50))]
+}
+
 export default function SegmentationDemo() {
   const [status, setStatus] = useState('idle') // idle | loading-model | segmenting | done | error
   const [errorMsg, setErrorMsg] = useState('')
   const [detected, setDetected] = useState([])
   const [opacity, setOpacity] = useState(0.55)
+  const [viewMode, setViewMode] = useState('segments') // 'segments' | 'confidence'
+  const [avgConfidence, setAvgConfidence] = useState(null)
 
   const segmenterRef = useRef(null)
   const canvasRef = useRef(null)
@@ -50,7 +63,7 @@ export default function SegmentationDemo() {
     const segmenter = await ImageSegmenter.createFromOptions(vision, {
       baseOptions: { modelAssetPath: MODEL_URL },
       outputCategoryMask: true,
-      outputConfidenceMasks: false,
+      outputConfidenceMasks: true,
       runningMode: 'IMAGE',
     })
     segmenterRef.current = segmenter
@@ -96,13 +109,57 @@ export default function SegmentationDemo() {
     ctx.globalAlpha = 1
   }
 
+  function drawConfidenceComposite(img, confPerPixel, maskW, maskH, alpha) {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    canvas.width = img.width
+    canvas.height = img.height
+    const ctx = canvas.getContext('2d')
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+    const heatCanvas = document.createElement('canvas')
+    heatCanvas.width = maskW
+    heatCanvas.height = maskH
+    const heatCtx = heatCanvas.getContext('2d')
+    const imageData = heatCtx.createImageData(maskW, maskH)
+
+    for (let i = 0; i < confPerPixel.length; i++) {
+      const [r, g, b] = confidenceColor(confPerPixel[i])
+      const o = i * 4
+      imageData.data[o] = r
+      imageData.data[o + 1] = g
+      imageData.data[o + 2] = b
+      imageData.data[o + 3] = 255
+    }
+    heatCtx.putImageData(imageData, 0, 0)
+
+    ctx.imageSmoothingEnabled = false
+    ctx.globalAlpha = alpha
+    ctx.drawImage(heatCanvas, 0, 0, canvas.width, canvas.height)
+    ctx.globalAlpha = 1
+  }
+
+  function redraw(mode, alpha) {
+    const frame = frameRef.current
+    if (!frame) return
+    if (mode === 'confidence') {
+      drawConfidenceComposite(frame.img, frame.confPerPixel, frame.maskW, frame.maskH, alpha)
+    } else {
+      drawComposite(frame.img, frame.mask, frame.maskW, frame.maskH, alpha)
+    }
+  }
+
   function handleOpacityChange(e) {
     const val = Number(e.target.value)
     setOpacity(val)
-    if (frameRef.current) {
-      const { img, mask, maskW, maskH } = frameRef.current
-      drawComposite(img, mask, maskW, maskH, val)
-    }
+    redraw(viewMode, val)
+  }
+
+  function handleViewModeChange(mode) {
+    setViewMode(mode)
+    redraw(mode, opacity)
   }
 
   async function handleFile(e) {
@@ -128,8 +185,30 @@ export default function SegmentationDemo() {
       const maskH = maskObj.height
       maskObj.close()
 
-      frameRef.current = { img, mask, maskW, maskH }
-      drawComposite(img, mask, maskW, maskH, opacity)
+      // Per-pixel confidence: for each pixel, read the probability of
+      // whichever class the model actually assigned it (not just the max
+      // across all 21 classes — those are the same value by construction,
+      // since categoryMask is the argmax of confidenceMasks).
+      const confMasks = result.confidenceMasks || []
+      const confArrays = confMasks.map((m) => m.getAsFloat32Array())
+      confMasks.forEach((m) => m.close())
+
+      const confPerPixel = new Float32Array(mask.length)
+      let sum = 0
+      let count = 0
+      for (let i = 0; i < mask.length; i++) {
+        const cls = mask[i]
+        const conf = confArrays[cls] ? confArrays[cls][i] : 0
+        confPerPixel[i] = conf
+        if (cls !== 0) {
+          sum += conf
+          count++
+        }
+      }
+      setAvgConfidence(count > 0 ? sum / count : null)
+
+      frameRef.current = { img, mask, maskW, maskH, confPerPixel }
+      redraw(viewMode, opacity)
 
       const seen = new Set(mask)
       setDetected(
@@ -141,6 +220,7 @@ export default function SegmentationDemo() {
       setStatus('done')
     } catch (err) {
       console.error('Segmentation demo error:', err)
+      setAvgConfidence(null)
       setErrorMsg(
         status === 'loading-model'
           ? 'Could not load the segmentation model — your browser or network may be blocking it. Try a different browser, or check your connection.'
@@ -198,6 +278,46 @@ export default function SegmentationDemo() {
               </div>
             )}
           </div>
+
+          {status === 'done' && (
+            <div className="ml-demo-mode-row">
+              <div className="view-toggle" role="tablist" aria-label="Overlay mode">
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={viewMode === 'segments'}
+                  className={viewMode === 'segments' ? 'active' : ''}
+                  onClick={() => handleViewModeChange('segments')}
+                >
+                  Segments
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={viewMode === 'confidence'}
+                  className={viewMode === 'confidence' ? 'active' : ''}
+                  onClick={() => handleViewModeChange('confidence')}
+                >
+                  Confidence
+                </button>
+              </div>
+
+              {avgConfidence !== null && (
+                <span className="ml-demo-confidence-stat">
+                  Avg. model confidence: <strong>{Math.round(avgConfidence * 100)}%</strong>
+                </span>
+              )}
+            </div>
+          )}
+
+          {status === 'done' && viewMode === 'confidence' && (
+            <p className="ml-demo-status">
+              Green = the model is confident about this pixel's class. Red = it's
+              uncertain — exactly the kind of signal my MRI project uses to
+              decide which cases need a radiologist's review instead of trusting
+              every prediction equally.
+            </p>
+          )}
 
           {status === 'loading-model' && (
             <p className="ml-demo-status">
