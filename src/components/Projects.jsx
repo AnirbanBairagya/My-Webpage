@@ -129,6 +129,33 @@ const PROJECTS = [
     link: '', // add your GitHub repo URL here
     visual: 'ar',
     relevance: { 'ml-engineer': 1, backend: 3 },
+    systemCard: {
+      status: 'Work in progress · Smart India Hackathon 2025 team project',
+      systemType: 'Mobile AR application (Unity + AR Foundation), with a cloud backend for content and metadata.',
+      developedBy: 'Anirban Bairagya, with a team — Smart India Hackathon 2025',
+      intendedUse:
+        'Letting visitors point a phone at a heritage site and see it reconstructed in AR with historical context layered on top, without needing a museum guide or physical signage.',
+      primaryUsers:
+        'Heritage-site visitors and tourism boards or cultural institutions looking to add interactive AR content to physical locations.',
+      outOfScope:
+        'Not yet hardened for public app-store release — this is a hackathon-stage prototype. Not designed to function fully offline; AR content streams from the cloud, so a working connection is expected on first visit to a new site.',
+      dataHandling:
+        'Site metadata (titles, historical descriptions, AR label coordinates) is stored in Firebase Firestore. 3D assets are streamed on demand from a Netlify-hosted CDN rather than bundled into the app. The current prototype does not collect personal visitor data.',
+      dependencies: [
+        'AR Foundation (ARCore / ARKit) — device-level AR tracking, outside this project\u2019s control.',
+        'Firebase Firestore — cloud metadata store; an outage or quota limit there would affect content loading.',
+        'Netlify CDN — hosts the 3D asset bundles; availability depends on this third-party service.',
+      ],
+      limitations: [
+        'AR tracking quality depends on the device and on real-world lighting/surface conditions, not just the app\u2019s own code.',
+        'Historical/descriptive content needs review by a subject-matter expert before any public release — accuracy hasn\u2019t been formally verified.',
+        'Built and tested primarily for the hackathon demo scope; broader device and OS-version compatibility hasn\u2019t been systematically tested yet.',
+      ],
+      considerations: [
+        'AR-only interfaces can be a barrier for visitors with visual impairments or without a compatible smartphone — a non-AR fallback (audio or text) would be needed for a genuinely accessible public release.',
+        'Historical framing of cultural sites carries real responsibility; content should be reviewed for accuracy and cultural sensitivity before wider deployment.',
+      ],
+    },
   },
 ]
 
