@@ -19,10 +19,12 @@ const SPEECH_SUPPORTED = typeof window !== 'undefined' && 'speechSynthesis' in w
 export default function ProjectModal({ project, onClose }) {
   const [view, setView] = useState('recruiter')
   const [speaking, setSpeaking] = useState(false)
+  const [showModelCard, setShowModelCard] = useState(false)
 
   useEffect(() => {
     if (!project) return
     setView('recruiter')
+    setShowModelCard(false)
     const onKey = (e) => {
       if (e.key === 'Escape') onClose()
     }
@@ -74,6 +76,8 @@ export default function ProjectModal({ project, onClose }) {
     window.speechSynthesis.speak(utterance)
     setSpeaking(true)
   }
+
+  const mc = project.modelCard
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -185,6 +189,74 @@ export default function ProjectModal({ project, onClose }) {
           <>
             <h4 className="modal-subhead">Dataset</h4>
             <p className="modal-body-text">{project.dataset}</p>
+          </>
+        )}
+
+        {mc && (
+          <>
+            <button
+              type="button"
+              className="btn btn-ghost model-card-toggle"
+              onClick={() => setShowModelCard((v) => !v)}
+              aria-expanded={showModelCard}
+            >
+              {showModelCard ? 'Hide Model Card ▴' : 'View Model Card ▾'}
+            </button>
+
+            {showModelCard && (
+              <div className="model-card">
+                <div className="model-card-row">
+                  <span className="model-card-label">Version</span>
+                  <span>{mc.version}</span>
+                </div>
+                <div className="model-card-row">
+                  <span className="model-card-label">Model Type</span>
+                  <span>{mc.modelType}</span>
+                </div>
+                <div className="model-card-row">
+                  <span className="model-card-label">Developed By</span>
+                  <span>{mc.developedBy}</span>
+                </div>
+
+                <h5 className="model-card-heading">Intended Use</h5>
+                <p className="modal-body-text">{mc.intendedUse}</p>
+                <p className="modal-body-text">
+                  <strong>Primary users:</strong> {mc.primaryUsers}
+                </p>
+                <p className="modal-body-text">
+                  <strong>Out of scope:</strong> {mc.outOfScope}
+                </p>
+
+                <h5 className="model-card-heading">Training Data</h5>
+                <p className="modal-body-text">{mc.trainingData}</p>
+
+                <h5 className="model-card-heading">Evaluation</h5>
+                <p className="modal-body-text">{mc.evaluation}</p>
+                <p className="modal-body-text model-card-pending">{mc.results}</p>
+
+                {mc.limitations?.length > 0 && (
+                  <>
+                    <h5 className="model-card-heading">Limitations</h5>
+                    <ul>
+                      {mc.limitations.map((l, i) => (
+                        <li key={i}>{l}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+
+                {mc.ethicalConsiderations?.length > 0 && (
+                  <>
+                    <h5 className="model-card-heading">Ethical Considerations</h5>
+                    <ul>
+                      {mc.ethicalConsiderations.map((l, i) => (
+                        <li key={i}>{l}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </div>
+            )}
           </>
         )}
 
