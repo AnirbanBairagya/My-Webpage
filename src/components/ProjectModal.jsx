@@ -20,11 +20,13 @@ export default function ProjectModal({ project, onClose }) {
   const [view, setView] = useState('recruiter')
   const [speaking, setSpeaking] = useState(false)
   const [showModelCard, setShowModelCard] = useState(false)
+  const [showSystemCard, setShowSystemCard] = useState(false)
 
   useEffect(() => {
     if (!project) return
     setView('recruiter')
     setShowModelCard(false)
+    setShowSystemCard(false)
     const onKey = (e) => {
       if (e.key === 'Escape') onClose()
     }
@@ -78,6 +80,7 @@ export default function ProjectModal({ project, onClose }) {
   }
 
   const mc = project.modelCard
+  const sc = project.systemCard
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -250,6 +253,81 @@ export default function ProjectModal({ project, onClose }) {
                     <h5 className="model-card-heading">Ethical Considerations</h5>
                     <ul>
                       {mc.ethicalConsiderations.map((l, i) => (
+                        <li key={i}>{l}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </div>
+            )}
+          </>
+        )}
+
+        {sc && (
+          <>
+            <button
+              type="button"
+              className="btn btn-ghost model-card-toggle"
+              onClick={() => setShowSystemCard((v) => !v)}
+              aria-expanded={showSystemCard}
+            >
+              {showSystemCard ? 'Hide System Card ▴' : 'View System Card ▾'}
+            </button>
+
+            {showSystemCard && (
+              <div className="model-card">
+                <div className="model-card-row">
+                  <span className="model-card-label">Status</span>
+                  <span>{sc.status}</span>
+                </div>
+                <div className="model-card-row">
+                  <span className="model-card-label">System Type</span>
+                  <span>{sc.systemType}</span>
+                </div>
+                <div className="model-card-row">
+                  <span className="model-card-label">Developed By</span>
+                  <span>{sc.developedBy}</span>
+                </div>
+
+                <h5 className="model-card-heading">Intended Use</h5>
+                <p className="modal-body-text">{sc.intendedUse}</p>
+                <p className="modal-body-text">
+                  <strong>Primary users:</strong> {sc.primaryUsers}
+                </p>
+                <p className="modal-body-text">
+                  <strong>Out of scope:</strong> {sc.outOfScope}
+                </p>
+
+                <h5 className="model-card-heading">Data &amp; Backend</h5>
+                <p className="modal-body-text">{sc.dataHandling}</p>
+
+                {sc.dependencies?.length > 0 && (
+                  <>
+                    <h5 className="model-card-heading">Third-Party Dependencies</h5>
+                    <ul>
+                      {sc.dependencies.map((l, i) => (
+                        <li key={i}>{l}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+
+                {sc.limitations?.length > 0 && (
+                  <>
+                    <h5 className="model-card-heading">Limitations</h5>
+                    <ul>
+                      {sc.limitations.map((l, i) => (
+                        <li key={i}>{l}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+
+                {sc.considerations?.length > 0 && (
+                  <>
+                    <h5 className="model-card-heading">Considerations</h5>
+                    <ul>
+                      {sc.considerations.map((l, i) => (
                         <li key={i}>{l}</li>
                       ))}
                     </ul>
