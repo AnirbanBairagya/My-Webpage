@@ -58,6 +58,34 @@ const PROJECTS = [
       'TCGA-GBM — pre-operative, multi-modal glioblastoma MRI scans, a publicly available clinical dataset widely used in brain tumor segmentation research.',
     link: '', // add your GitHub repo URL here once you push the code
     relevance: { 'ml-engineer': 3, backend: 1 },
+    modelCard: {
+      version: 'v0.1 · research / in development',
+      modelType:
+        'SegResNet-based 3D CNN encoder-decoder, with an added reliability/confidence estimation head.',
+      developedBy: 'Anirban Bairagya — B.Tech CSE major project',
+      intendedUse:
+        'Research and educational demonstration of confidence-aware medical image segmentation. Intended to assist — not replace — radiologist review, by triaging scans according to estimated reliability.',
+      primaryUsers:
+        'ML/CV researchers, students, and radiology-adjacent researchers interested in reliability-aware AI.',
+      outOfScope:
+        'Not intended for direct clinical diagnosis or treatment decisions. Not validated, cleared, or approved for use in any real clinical workflow.',
+      trainingData:
+        'TCGA-GBM (The Cancer Genome Atlas Glioblastoma Multiforme), a publicly available clinical dataset. Multi-modal MRI: T1, T1CE, T2, FLAIR.',
+      evaluation:
+        'A locked test split, opened only once. Metrics: Dice Similarity Coefficient (whole tumor, tumor core, enhancing tumor sub-regions), paired statistical significance testing against an nnU-Net baseline.',
+      results:
+        'Evaluation in progress — final Dice scores and baseline comparison will be published here once testing is complete.',
+      limitations: [
+        'Trained on a single public dataset (TCGA-GBM), which may not represent the full diversity of scanners, institutions, or patient populations seen in general clinical practice.',
+        'Not yet validated on external or multi-institutional data.',
+        'Confidence/reliability scores are model-derived estimates, not certified clinical uncertainty measurements.',
+      ],
+      ethicalConsiderations: [
+        'Medical imaging datasets can encode bias from how and where they were collected; performance may vary for sub-populations underrepresented in TCGA-GBM.',
+        'A confident-but-wrong prediction used without human oversight carries real patient-safety risk — this is the core problem the reliability layer is designed to address, not a solved one.',
+        'Not FDA/CE cleared or approved for clinical use of any kind.',
+      ],
+    },
   },
   {
     id: 'pocket-heritage-ar',
