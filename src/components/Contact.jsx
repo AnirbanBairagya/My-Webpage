@@ -10,7 +10,7 @@ export default function Contact() {
             Reach out directly &mdash; I reply fast.
           </p>
           <div className="contact-actions">
-            <a href="mailto: sonalibairagya139@gmail.com" className="btn btn-primary">
+            <a href="mailto:sonalibairagya139@gmail.com" className="btn btn-primary">
               Email me
             </a>
           </div>
