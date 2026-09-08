@@ -9,8 +9,18 @@ import { Experience, Education } from './components/ExperienceEducation.jsx'
 import Interests from './components/Interests.jsx'
 import Contact, { Footer } from './components/Contact.jsx'
 import ChatWidget from './components/ChatWidget.jsx'
+import AdminApp from './components/AdminApp.jsx'
 
 export default function App() {
+  // No router library — just a plain pathname check. /admin (and
+  // anything under it) shows the admin panel instead of the portfolio.
+  const isAdminRoute =
+    typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')
+
+  if (isAdminRoute) {
+    return <AdminApp />
+  }
+
   return (
     <>
       <Nav />
