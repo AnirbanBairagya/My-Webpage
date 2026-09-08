@@ -1505,3 +1505,231 @@ footer {
   font-style: italic;
   color: var(--amber) !important;
 }
+
+
+
+/* ---------- ADMIN ---------- */
+.admin-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  background: var(--bg);
+}
+
+.admin-login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: 24px;
+}
+
+.admin-login-box {
+  width: 100%;
+  max-width: 380px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  padding: 40px;
+}
+
+.admin-login-box h1 {
+  font-size: 1.6rem;
+  margin-top: 10px;
+}
+
+.admin-login-sub {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 8px;
+  margin-bottom: 28px;
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  text-transform: none;
+  letter-spacing: normal;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--text);
+  resize: vertical;
+}
+
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+  outline: none;
+  border-color: var(--cyan);
+}
+
+.admin-field code {
+  color: var(--cyan);
+  font-size: 0.72rem;
+}
+
+.admin-input-error {
+  border-color: var(--amber) !important;
+}
+
+.admin-error {
+  color: var(--amber);
+  background: rgba(255, 180, 84, 0.08);
+  border: 1px solid rgba(255, 180, 84, 0.3);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+  text-transform: none;
+  letter-spacing: normal;
+  margin-bottom: 16px;
+}
+
+.admin-notice {
+  background: rgba(76, 224, 210, 0.08);
+  border: 1px solid rgba(76, 224, 210, 0.3);
+  color: var(--cyan);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+}
+
+.admin-shell {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.admin-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-header h1 {
+  font-size: 1.8rem;
+  margin-top: 8px;
+}
+
+.admin-header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-session-email {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.admin-tabs {
+  margin-bottom: 28px;
+}
+
+.admin-add-btn {
+  margin-bottom: 20px;
+}
+
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 16px 18px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-list-row strong {
+  display: block;
+  font-size: 0.98rem;
+}
+
+.admin-list-meta {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.admin-list-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-danger {
+  border-color: rgba(255, 100, 100, 0.4);
+  color: #ff8a8a;
+}
+
+.admin-danger:hover {
+  border-color: #ff8a8a;
+  background: rgba(255, 100, 100, 0.08);
+}
+
+.admin-form-title {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.admin-form {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 28px;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 560px) {
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
