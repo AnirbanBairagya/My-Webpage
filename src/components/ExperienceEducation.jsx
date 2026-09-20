@@ -28,6 +28,17 @@ export function Experience() {
             </ul>
           </div>
         </div>
+        <div className="timeline">
+          <div className="timeline-item">
+            <div className="when">Sep 2026 &ndash; Present</div>
+            <h3>Finishing School Program on 3D Printing and Additive Manufacturing Technology</h3>
+            <div className="org">3DSkillIndiaBCREC</div>
+            <ul>
+              <li>Gained hands-on experience in developing dynamic web applications using PHP and MySQL.</li>
+              <li>Developed and implemented a functional Online Bus Ticket Booking System with a user-friendly interface.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   )
