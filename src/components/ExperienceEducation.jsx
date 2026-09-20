@@ -34,8 +34,8 @@ export function Experience() {
             <h3>Finishing School Program on 3D Printing and Additive Manufacturing Technology</h3>
             <div className="org">3DSkillIndiaBCREC</div>
             <ul>
-              <li>Gained hands-on experience in developing dynamic web applications using PHP and MySQL.</li>
-              <li>Developed and implemented a functional Online Bus Ticket Booking System with a user-friendly interface.</li>
+              <li>The Finishing School Program on 3D Printing and Additive Manufacturing Technology is designed to enhance students' industry readiness through hands-on training, practical exposure, and conceptual understanding</li>
+              <li>The program covers key aspects such as design fundamentals, materials, slicing techniques, machine operation, applications, and industry-relevant practices.</li>
             </ul>
           </div>
         </div>
